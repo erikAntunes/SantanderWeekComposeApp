@@ -30,11 +30,13 @@ fun Header(
             .height(143.dp)
             .background(color = MaterialTheme.colorScheme.primary)
     ) {
-        Column(modifier = Modifier.padding(
-            horizontal = Spacing_2,
-            vertical = Spacing_4
+        Column(
+            modifier = Modifier.padding(
+                horizontal = Spacing_2,
+                vertical = Spacing_4
 
-        )) {
+            )
+        ) {
             Text(
                 text = "Olá, $name",
                 color = Color.White
