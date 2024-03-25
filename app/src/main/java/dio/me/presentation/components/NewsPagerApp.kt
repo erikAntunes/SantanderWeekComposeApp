@@ -42,7 +42,9 @@ fun NewsPagerApp(
     modifier: Modifier = Modifier,
     news: List<News> = emptyList()
 ) {
-    Column() {
+    Column(
+        modifier = modifier
+    ) {
         val pagerState = rememberPagerState(pageCount = {
             news.size
         })

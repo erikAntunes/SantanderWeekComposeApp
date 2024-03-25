@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dio.me.presentation.theme.SantanderDevWeekTheme
-import dio.me.presentation.theme.Spacing_2
+import dio.me.presentation.theme.Spacing_1
 
 @Composable
 fun CreditCard(
@@ -29,15 +29,15 @@ fun CreditCard(
     number: String = ""
 ) {
     AppCard(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .height(66.dp),
+            .height(74.dp),
         containerColor = MaterialTheme.colorScheme.primary
     ) {
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
-                .padding(horizontal = Spacing_2),
+                .padding(horizontal = Spacing_1),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -61,8 +61,8 @@ fun CreditCard(
 
 @Preview
 @Composable
-fun CrediCardPrview() {
+fun CreditCardPreview() {
     SantanderDevWeekTheme {
-        CreditCard()
+        CreditCard(number = "1234") // Exemplo de número de cartão
     }
 }
