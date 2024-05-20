@@ -43,7 +43,7 @@ jobs:
             app/build/outputs/apk/release/app-release-unsigned.apk ${{ secrets.KEY_ALIAS }}
           
           # Verify the APK
-          jarsigner -verify -verbose -certs app/build/outputs/apk/release/app-release-unsigned.apk
+          jarsigner -verify -verbose -certs app/build/outputs/apk/release/app-release.apk
 
       - name: Align the APK
         run: |
