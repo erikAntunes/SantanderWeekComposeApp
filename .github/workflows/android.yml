@@ -34,15 +34,15 @@ jobs:
       - name: Sign and Verify APK
         run: |
           echo ${{ secrets.KEYSTORE_BASE64 }} | base64 --decode > keystore/santander.jks
-          ${ANDROID_HOME}/build-tools/33.0.0/apksigner sign --ks keystore/santander.jks --ks-key-alias ${{ secrets.KEY_ALIAS }} --ks-pass env:KEYSTORE_PASSWORD --key-pass env:KEY_PASSWORD --out app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/app-release-signed.apk
-          ${ANDROID_HOME}/build-tools/33.0.0/apksigner verify app/build/outputs/apk/release/app-release-signed.apk
+          ${ANDROID_HOME}/build-tools/33.0.0/apksigner sign --ks keystore/santander.jks --ks-key-alias ${{ secrets.KEY_ALIAS }} --ks-pass env:KEYSTORE_PASSWORD --key-pass env:KEY_PASSWORD --out app/build/outputs/apk/release/app-release.apk
+          ${ANDROID_HOME}/build-tools/33.0.0/apksigner verify app/build/outputs/apk/release/app-release.apk
 
 
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
           name: app-release.apk
-          path: app/release/app-release-signed.apk
+          path: app/release/app-release.apk
 
 env:
   KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
