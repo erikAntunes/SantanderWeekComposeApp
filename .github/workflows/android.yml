@@ -35,7 +35,7 @@ jobs:
         run: |
           echo ${{ secrets.KEYSTORE_BASE64 }} | base64 --decode > keystore/santander.jks
           ${ANDROID_HOME}/build-tools/33.0.0/apksigner sign --ks keystore/santander.jks --ks-key-alias ${{ secrets.KEY_ALIAS }} --ks-pass env:KEYSTORE_PASSWORD --key-pass env:KEY_PASSWORD --out app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release-unsigned.apk 
-          ${ANDROID_HOME}/build-tools/33.0.0/apksigner verify app/build/outputs/apk/release/app-release-unsign.apk
+          ${ANDROID_HOME}/build-tools/33.0.0/apksigner verify app\release\app-release.apk
 
 
 
