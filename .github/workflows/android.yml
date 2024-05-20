@@ -31,26 +31,18 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew assembleRelease
 
-      - name: Decode keystore
-        run: echo ${{ secrets.KEYSTORE_BASE64 }} | base64 --decode > santander.jks
-
-      - name: Sign the APK
+      - name: Sign and Verify APK
         run: |
-          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
-            -keystore santander.jks \
-            -storepass ${{ secrets.KEYSTORE_PASSWORD }} \
-            -keypass ${{ secrets.KEY_PASSWORD }} \
-            app/build/outputs/apk/release/app-release.apk ${{ secrets.KEY_ALIAS }}
-          
-          # Verify the APK
-          jarsigner -verify -verbose -certs app/build/outputs/apk/release/app-release.apk
-
-      - name: Align the APK
-        run: |
-          ${ANDROID_HOME}/build-tools/33.0.0/zipalign -v 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/app-release.apk
+          echo ${{ secrets.KEYSTORE_BASE64 }} | base64 --decode > santander.jks
+          ${ANDROID_HOME}/build-tools/33.0.0/apksigner sign --ks santander.jks --ks-key-alias ${{ secrets.KEY_ALIAS }} --ks-pass env:KEYSTORE_PASSWORD --key-pass env:KEY_PASSWORD --out app/build/outputs/apk/release/app-release-signed.apk app/build/outputs/apk/release/app-release.apk
+          ${ANDROID_HOME}/build-tools/33.0.0/apksigner verify app/build/outputs/apk/release/app-release-signed.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
           name: app-release.apk
-          path: app/build/outputs/apk/release/app-release.apk
+          path: app/build/outputs/apk/release/app-release-signed.apk
+
+env:
+  KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+  KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
