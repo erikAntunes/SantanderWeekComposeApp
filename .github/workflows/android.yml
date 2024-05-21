@@ -36,16 +36,6 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew assembleRelease --profile
 
-      - name: Cache Gradle files
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
       - name: Sign and Verify APK
         run: |
           echo ${{ secrets.KEYSTORE_BASE64 }} | base64 --decode > keystore/santander.jks
