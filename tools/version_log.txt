@@ -1,2 +1,2 @@
-1.0.3
-- Configurando esteira para gerar Apk assinada
+1.0.4
+- Configurando esteira para gerar Apk assinada após merge na branch "main"
