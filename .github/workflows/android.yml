@@ -13,6 +13,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Clear Gradle and Node.js Cache
+        run: |
+          sudo rm -rf ~/.gradle/caches
+          sudo rm -rf ~/.gradle/wrapper
+          sudo rm -rf ~/.npm
+          sudo rm -rf ~/.nvm
+          sudo rm -rf ~/.node-gyp
+          sudo rm -rf ~/.node_cache
+          sudo rm -rf ~/.pnpm
+          sudo rm -rf ~/.config/yarn
+          sudo rm -rf ~/.yarn
+          sudo rm -rf /opt/homebrew
+          sudo rm -rf /usr/local/share/
+          sudo rm -rf /usr/local/bin/node /usr/local/bin/npm /usr/local/bin/npx
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -24,7 +39,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: 'temurin' 
           java-version: '17'
 
       - name: Cache Gradle files
