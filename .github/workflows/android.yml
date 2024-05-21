@@ -13,10 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clear cache
-        run: |
-          sudo rm -rf /usr/local/share/ && sudo rm -rf /usr/local/bin/node /usr/local/bin/npm /usr/local/bin/npx && sudo rm -rf ~/.npm ~/.nvm ~/.node-gyp ~/.node_cache ~/.pnpm ~/.config/yarn ~/.yarn && sudo rm -rf /opt/homebrew/ && brew cleanup --prune-prefix && brew uninstall --ignore-dependencies node icu4c && brew install node@20 && echo 'export PATH="/usr/local/opt/node@20/bin:$PATH"' >> $GITHUB_ENV
-
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
