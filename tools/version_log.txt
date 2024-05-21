@@ -1,2 +1,2 @@
-1.0.2
+1.0.3
 - Configurando esteira para gerar Apk assinada
